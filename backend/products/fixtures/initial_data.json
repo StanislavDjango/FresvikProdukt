@@ -1,0 +1,301 @@
+[
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "slug": "fresvik-pir-panel",
+      "title": "Fresvik PIR-Panel",
+      "subtitle": "Nå er vi først ute i Norge med neste generasjons isolasjonspanel til kjøle- og fryserom.",
+      "lead": "Fresvik Produkt har produsert kjøle- og fryserom sidan 1980, og er i dag den einaste norske produsenten av isolasjonspanel til kjøle- og fryserom.",
+      "overview": "Fresvik kjøle- og fryserom blir levert med veggar, golv, tak og dørar eller portar. Vår storleik, kombinert med ei bevisst satsing på fleksible produksjonsløysingar, set oss i stand til å levere kundetilpassa løysingar. Fresvik PIR-Panel er eit sandwichelement med oppskumma PIR-skum (Polyisocyanurat-skum) som kjerne, innkapsla mellom to stålplater.",
+      "hero_image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/d1e8ab46-e86a-4e94-a140-75a4bf64054d/aaa.jpg",
+      "logo_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/c59a56fc-ef6d-4b0d-b533-66f9837645cc/Logo_Orginal.png",
+      "cta_title": "Har du eit prosjekt du vil diskutere med oss?",
+      "cta_body": "Ta kontakt med oss for rådgiving, tekniske avklaringar og skreddarsydde løysingar.",
+      "cta_button_label": "Ta kontakt",
+      "cta_button_url": "https://www.fresvik.no/kontakt",
+      "partners_body": "Vår visjon er å vere den beste samarbeidspartnaren for deg som kjøleentreprenør. Ønskjer du meir informasjon om produkta våre, ta gjerne kontakt med oss."
+    }
+  },
+  {
+    "model": "products.productfeature",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "title": "Utvikla og produsert i Norge",
+      "body": "Kort veg frå idé til ferdig produkt gir trygg levering og kontrollert kvalitet.",
+      "icon_url": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "products.productfeature",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "title": "SINTEF-godkjent",
+      "body": "Dokumentert ytelse og tryggleik i krevjande installasjonar.",
+      "icon_url": "",
+      "order": 2
+    }
+  },
+  {
+    "model": "products.productfeature",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "title": "Fleksibelt på byggeplass",
+      "body": "Modulmål gir mindre svinn og raskare framdrift.",
+      "icon_url": "",
+      "order": 3
+    }
+  },
+  {
+    "model": "products.productfeature",
+    "pk": 4,
+    "fields": {
+      "product": 1,
+      "title": "Enkel montasje med eksenterlås",
+      "body": "Rask og presis montering med låssystem som sparer tid.",
+      "icon_url": "",
+      "order": 4
+    }
+  },
+  {
+    "model": "products.productfeature",
+    "pk": 5,
+    "fields": {
+      "product": 1,
+      "title": "Kort design-, produksjons- og leveringstid",
+      "body": "Effektiv produksjon gir leveranse når prosjektet treng det.",
+      "icon_url": "",
+      "order": 5
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Høgtrykkskum",
+      "value": "PIR (polyisocyanurat)",
+      "order": 1
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Brannklasse",
+      "value": "B-s1, d0",
+      "order": 2
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Tykkelse",
+      "value": "75, 100, 125, 150 og 175 mm",
+      "order": 3
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 4,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Densitet",
+      "value": "43 (+/-3) kg/m3",
+      "order": 4
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 5,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Vekt (ca.)",
+      "value": "14 - 18.5 kg/m2",
+      "order": 5
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 6,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "U-verdi/termisk transmittans",
+      "value": "0.14 - 0.29 W/(m2K)",
+      "order": 6
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 7,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Temperatur",
+      "value": "-40°C til +70°C",
+      "order": 7
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 8,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Fleksibel romhøgde",
+      "value": "Trinn på 50 mm, opptil 8000 mm",
+      "order": 8
+    }
+  },
+  {
+    "model": "products.productspec",
+    "pk": 9,
+    "fields": {
+      "product": 1,
+      "group": "Tekniske data",
+      "label": "Fleksibel modulbredde",
+      "value": "Trinn på 300 mm",
+      "order": 9
+    }
+  },
+  {
+    "model": "products.productsection",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "title": "Konstruksjon",
+      "body": "Fresvik-panel er basert på eit fleksibelt modulsystem med eksenterlås i overgangane. Panela har ei hygienisk overflate.",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/339870db-e604-492a-a688-fbc917a03d26/notfjaer1.jpg",
+      "order": 1
+    }
+  },
+  {
+    "model": "products.productsection",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "title": "Isolasjon",
+      "body": "Høytrykkskumma polyuretan, ca. 40-45 kg/m3. Tilfredsstiller gjeldande miljøkrav.",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/3ab6632b-c2d4-46ea-9f59-3674e266916e/image-asset%2B%284%29.jpeg",
+      "order": 2
+    }
+  },
+  {
+    "model": "products.productsection",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "title": "Overflate",
+      "body": "Standard overflate i 0,55 mm galvanisert stålplate med 25 µm polyester, type FoodSafe. Overflate kan leverast i rustfritt stål, syrefast stål, glassfiber-armert polyester eller andre platetypar.",
+      "image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/ce3eb664-c398-48ec-bcab-3acefac67026/aaa.jpg",
+      "order": 3
+    }
+  },
+  {
+    "model": "products.productgalleryimage",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/339870db-e604-492a-a688-fbc917a03d26/notfjaer1.jpg",
+      "caption": "",
+      "order": 1
+    }
+  },
+  {
+    "model": "products.productgalleryimage",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/3ab6632b-c2d4-46ea-9f59-3674e266916e/image-asset%2B%284%29.jpeg",
+      "caption": "",
+      "order": 2
+    }
+  },
+  {
+    "model": "products.productgalleryimage",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "image_url": "https://images.squarespace-cdn.com/content/v1/64ec79dc5754e2533112d764/ce3eb664-c398-48ec-bcab-3acefac67026/aaa.jpg",
+      "caption": "",
+      "order": 3
+    }
+  },
+  {
+    "model": "products.productdownload",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "title": "Last ned PIR-Paneler produktblad",
+      "file_url": "https://www.fresvik.no/s/PIR.pdf",
+      "order": 1
+    }
+  },
+  {
+    "model": "products.productdownload",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "title": "Last ned PIR-Paneler montasjeanvisning",
+      "file_url": "https://www.fresvik.no/s/FP-PIR-Paneler_Montasjeanvisning-nov-2025.pdf",
+      "order": 2
+    }
+  },
+  {
+    "model": "products.relatedproduct",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "title": "Elebar ventil",
+      "subtitle": "Trygg ventil for kjøle- og fryserom",
+      "link_url": "https://www.fresvik.no/produkt/elebar-ventil",
+      "order": 1
+    }
+  },
+  {
+    "model": "products.relatedproduct",
+    "pk": 2,
+    "fields": {
+      "product": 1,
+      "title": "MaxiElebar ventil",
+      "subtitle": "Sikkerheitsventil for større rom",
+      "link_url": "https://www.fresvik.no/produkt/maxielebar-ventil",
+      "order": 2
+    }
+  },
+  {
+    "model": "products.relatedproduct",
+    "pk": 3,
+    "fields": {
+      "product": 1,
+      "title": "PEGO Innestengnings-alarm",
+      "subtitle": "Alarm ved innestenging",
+      "link_url": "https://www.fresvik.no/produkt/pego-innestengnings-alarm",
+      "order": 3
+    }
+  },
+  {
+    "model": "products.relatedproduct",
+    "pk": 4,
+    "fields": {
+      "product": 1,
+      "title": "Beslag",
+      "subtitle": "Tilbehør og beslag",
+      "link_url": "https://www.fresvik.no/produkt/beslag",
+      "order": 4
+    }
+  }
+]
