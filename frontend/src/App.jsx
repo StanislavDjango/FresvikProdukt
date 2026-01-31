@@ -18,9 +18,9 @@ export default function App() {
         <div className="hero-overlay" aria-hidden="true" />
 
         <nav className="nav">
-          <div className="container nav-shell">
-            <div className="nav-inner">
-              <img className="nav-logo" src="/img/Logo/LogoFresvik.png" alt="Fresvik Produkt" />
+          <div className="container nav-wrap">
+            <img className="nav-logo-floating" src="/img/Logo/LogoFresvik.png" alt="Fresvik Produkt" />
+            <div className="nav-shell">
               <ul className="nav-links">
                 {navItems.map((item) => (
                   <li key={item}>
