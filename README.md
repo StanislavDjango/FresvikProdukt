@@ -1,66 +1,43 @@
-# Fresvik Produkt (Django + React + Postgres)
+# Fresvik (Django + React + Postgres)
 
-This repo sets up a Django API with Jazzmin admin, a Vite + React frontend, and PostgreSQL via Docker Compose.
+Minimal setup for a Django API, a Vite + React frontend, and Postgres via Docker Compose.
 
-## Quick start (Docker)
+## Docker quick start
 
-1) Start services:
+1) Build and start services:
 
 ```
 docker compose up --build
 ```
 
-2) Run migrations and load the initial data:
+2) Run migrations:
 
 ```
 docker compose exec backend python manage.py migrate
 ```
 
+3) (Optional) Load demo data:
+
 ```
 docker compose exec backend python manage.py loaddata products/fixtures/initial_data.json
 ```
 
-3) Create an admin user:
+4) Create an admin user:
 
 ```
 docker compose exec backend python manage.py createsuperuser
 ```
 
-4) Open the apps:
-
-- Frontend: http://localhost:5173
-- API: http://localhost:8000/api/products/fresvik-pir-panel/
-- Admin: http://localhost:8000/admin/
-
-## Frontend background image
-
-The hero section expects a local background image at:
-
-```
-frontend/public/hero-bg.jpg
-```
-
-Drop the provided photo there to use it as the hero background.
-
-## Local (non-Docker)
-
-Backend:
-
-```
-cd backend
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py loaddata products/fixtures/initial_data.json
-python manage.py createsuperuser
-python manage.py runserver
-```
-
-Frontend:
+## Frontend
 
 ```
 cd frontend
 npm install
 npm run dev
+```
+
+Environment variable for API:
+
+```
+VITE_API_URL=http://localhost:8000/api/
 ```
