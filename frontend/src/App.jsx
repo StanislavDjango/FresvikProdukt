@@ -28,8 +28,6 @@ const navItems = [
   { label: 'Kontakt', href: '/kontakt' },
   { label: 'Send forespørsel', href: '/kontakt' },
 ]
-const actionItems = ['Kontakt oss', 'Isolasjon', 'Forespørsel']
-
 export default function App() {
   const [activeMenu, setActiveMenu] = useState(null)
   const closeTimer = useRef(null)
@@ -115,23 +113,48 @@ export default function App() {
           </div>
         </div>
 
-        <div className="container hero-actions">
-          {actionItems.map((item, index) => (
-            <button
-              key={item}
-              className={`pill ${index === 0 ? 'pill--primary' : ''}`}
-              type="button"
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-
-        <footer className="container hero-footer">
-          <span>2024 Fresvik Produkt AS. Alle rettigheter reservert.</span>
-          <span>Personvern</span>
-          <span>Cookies</span>
-          <span>Krediteringer</span>
+        <footer className="site-footer">
+          <div className="container footer-top">
+            <div className="footer-col">
+              <h3>Fresvik Produkt AS</h3>
+              <p>
+                Fresvikvegen 995,
+                <br />
+                6896 Fresvik
+              </p>
+              <p>Tel: 57 69 83 00</p>
+              <p>
+                E-post: <a href="#">post@fresvik.no</a>
+              </p>
+            </div>
+            <div className="footer-col footer-news">
+              <h3>Motta nyheitsbrev</h3>
+              <p>
+                Meld deg på vårt nyheitsbrev og få tips og inspirasjon frå bransjen.
+              </p>
+              <a href="#">Sjå vår personvernerklæring.</a>
+              <form className="footer-form" action="#" method="post">
+                <label className="sr-only" htmlFor="footer-newsletter-email">
+                  Nyheitsbrev
+                </label>
+                <input
+                  id="footer-newsletter-email"
+                  name="email"
+                  type="email"
+                  placeholder="E-postadresse"
+                  autoComplete="email"
+                />
+                <button type="submit">Meld på</button>
+              </form>
+            </div>
+          </div>
+          <div className="container footer-divider" />
+          <div className="container footer-bottom">
+            <div className="footer-col footer-links" aria-hidden="true" />
+          </div>
+          <div className="container footer-note">
+            <p>Uoffisiell testside / designkonsept. Ikke en offisiell nettside for Fresvik Produkt AS.</p>
+          </div>
         </footer>
       </header>
     </div>
