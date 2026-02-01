@@ -503,11 +503,12 @@ button {
 .site-footer {
   position: relative;
   z-index: 2;
-  margin-top: clamp(28px, 4vw, 56px);
-  background: linear-gradient(180deg, rgba(9, 24, 42, 0.96), rgba(5, 14, 26, 0.98));
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 0;
+  background: rgba(255, 255, 255, 0.14);
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
   padding: clamp(28px, 4vw, 48px) 0 clamp(24px, 4vw, 40px);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
+  box-shadow: none;
 }
 
 .footer-top,
