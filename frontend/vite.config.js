@@ -8,5 +8,10 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     allowedHosts: ['stanislav.help', 'www.stanislav.help', 'localhost', '127.0.0.1'],
+    headers: {
+      'Cache-Control': 'no-store, must-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
   },
 })
