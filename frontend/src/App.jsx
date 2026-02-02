@@ -83,6 +83,8 @@ export default function App() {
   const [activeMenu, setActiveMenu] = useState(null)
   const [language, setLanguage] = useState('no')
   const [page, setPage] = useState(() => getPageFromHash(window.location.hash))
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileOpenSection, setMobileOpenSection] = useState(null)
   const closeTimer = useRef(null)
 
   useEffect(() => {
@@ -93,6 +95,22 @@ export default function App() {
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
+
+  useEffect(() => {
+    if (!isMobileMenuOpen) return
+    const handleKey = (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuOpen(false)
+        setMobileOpenSection(null)
+      }
+    }
+    document.addEventListener('keydown', handleKey)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', handleKey)
+      document.body.style.overflow = ''
+    }
+  }, [isMobileMenuOpen])
 
   const openMenu = (key) => {
     if (closeTimer.current) {
@@ -118,6 +136,8 @@ export default function App() {
 
   const goHome = () => {
     setActiveMenu(null)
+    setMobileMenuOpen(false)
+    setMobileOpenSection(null)
     if (window.location.hash) {
       window.location.hash = ''
     } else {
@@ -127,12 +147,28 @@ export default function App() {
 
   const goPage = (hash, targetPage) => {
     setActiveMenu(null)
+    setMobileMenuOpen(false)
+    setMobileOpenSection(null)
     if (!hash) return
     if (window.location.hash !== `#${hash}`) {
       window.location.hash = hash
     } else if (targetPage) {
       setPage(targetPage)
     }
+  }
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen((open) => {
+      const next = !open
+      if (!next) {
+        setMobileOpenSection(null)
+      }
+      return next
+    })
+  }
+
+  const handleMobileSection = (key) => {
+    setMobileOpenSection((current) => (current === key ? null : key))
   }
 
   const references = [
@@ -333,6 +369,18 @@ export default function App() {
                   </li>
                 ))}
               </ul>
+              <button
+                type="button"
+                className={`nav-toggle ${isMobileMenuOpen ? 'is-open' : ''}`}
+                aria-label="Meny"
+                aria-expanded={isMobileMenuOpen}
+                aria-controls="mobile-drawer"
+                onClick={toggleMobileMenu}
+              >
+                <span />
+                <span />
+                <span />
+              </button>
             </div>
             <div className="nav-lang" role="group" aria-label="Språk">
               <span className="nav-lang-icon" aria-hidden="true">
@@ -362,6 +410,106 @@ export default function App() {
               </button>
             </div>
           </div>
+
+          <div
+            className={`nav-drawer-overlay ${isMobileMenuOpen ? 'is-open' : ''}`}
+            onClick={() => {
+              setMobileMenuOpen(false)
+              setMobileOpenSection(null)
+            }}
+          />
+          <aside
+            id="mobile-drawer"
+            className={`nav-drawer ${isMobileMenuOpen ? 'is-open' : ''}`}
+            aria-hidden={!isMobileMenuOpen}
+          >
+            <div className="nav-drawer-header">
+              <img className="nav-drawer-logo" src="/img/Logo/LogoFresvik.png" alt="Fresvik Produkt" />
+              <button
+                type="button"
+                className="nav-drawer-close"
+                aria-label="Lukk meny"
+                onClick={() => {
+                  setMobileMenuOpen(false)
+                  setMobileOpenSection(null)
+                }}
+              >
+                ×
+              </button>
+            </div>
+            <div className="nav-drawer-lang" role="group" aria-label="Språk">
+              <span className="nav-lang-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                  <path
+                    d="M12 2.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19zm6.7 7H15.7a14.7 14.7 0 0 0-1.2-4 7.6 7.6 0 0 1 4.2 4zm-6.7-5a13 13 0 0 1 1.5 5H10.5a13 13 0 0 1 1.5-5zm-5.7 5a7.6 7.6 0 0 1 4.2-4 14.7 14.7 0 0 0-1.2 4H6.3zm0 5h3.2c.2 1.4.6 2.8 1.2 4a7.6 7.6 0 0 1-4.4-4zm5.7 5a13 13 0 0 1-1.5-5h3.1a13 13 0 0 1-1.5 5zm3-1a14.7 14.7 0 0 0 1.2-4h3.2a7.6 7.6 0 0 1-4.4 4zm1.4-5c.1-.7.1-1.4.1-2s0-1.3-.1-2h3.6a7.7 7.7 0 0 1 0 4h-3.6zm-9.8 0a7.7 7.7 0 0 1 0-4h3.6c-.1.7-.1 1.4-.1 2s0 1.3.1 2H6.3zm4.3-4h3.1c.1.7.1 1.4.1 2s0 1.3-.1 2h-3.1c-.1-.7-.1-1.4-.1-2s0-1.3.1-2z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <button
+                type="button"
+                className={`nav-lang-btn ${language === 'no' ? 'is-active' : ''}`}
+                onClick={() => setLang('no')}
+                aria-pressed={language === 'no'}
+              >
+                NO
+              </button>
+              <span className="nav-lang-sep">|</span>
+              <button
+                type="button"
+                className={`nav-lang-btn ${language === 'en' ? 'is-active' : ''}`}
+                onClick={() => setLang('en')}
+                aria-pressed={language === 'en'}
+              >
+                EN
+              </button>
+            </div>
+            <ul className="nav-drawer-links">
+              {navItems.map((item) => (
+                <li key={item.key} className="nav-drawer-item">
+                  {item.items ? (
+                    <>
+                      <button type="button" onClick={() => handleMobileSection(item.key)}>
+                        <span>{item.label[language]}</span>
+                        <span className="nav-drawer-chevron">{mobileOpenSection === item.key ? '−' : '+'}</span>
+                      </button>
+                      <div
+                        className={`nav-drawer-submenu ${mobileOpenSection === item.key ? 'is-open' : ''}`}
+                      >
+                        {item.items[language].map((subItem) => (
+                          <a
+                            key={subItem}
+                            href="#"
+                            onClick={() => {
+                              setMobileMenuOpen(false)
+                              setMobileOpenSection(null)
+                            }}
+                          >
+                            {subItem}
+                          </a>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <a
+                      href={item.href ?? '#'}
+                      onClick={(event) => {
+                        if (item.page) {
+                          event.preventDefault()
+                          goPage(item.hash ?? item.page, item.page)
+                        } else {
+                          setMobileMenuOpen(false)
+                          setMobileOpenSection(null)
+                        }
+                      }}
+                    >
+                      {item.label[language]}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </aside>
         </nav>
 
         <div className="container hero-body">
