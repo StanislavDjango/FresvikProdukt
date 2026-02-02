@@ -27,6 +27,7 @@ const navItems = [
     key: 'references',
     href: '#referansar',
     page: 'references',
+    hash: 'referansar',
     label: { no: 'Referansar', en: 'References' },
   },
   {
@@ -56,11 +57,27 @@ const navItems = [
       en: ['Fresvik Produkt', 'Employees', 'News', 'Careers'],
     },
   },
-  { key: 'contact', href: '/kontakt', label: { no: 'Kontakt', en: 'Contact' } },
-  { key: 'inquiry', href: '/kontakt', label: { no: 'Send forespørsel', en: 'Send inquiry' } },
+  {
+    key: 'contact',
+    href: '#kontakt',
+    page: 'contact',
+    hash: 'kontakt',
+    label: { no: 'Kontakt', en: 'Contact' },
+  },
+  {
+    key: 'inquiry',
+    href: '#kontakt-foresporing',
+    page: 'contact',
+    hash: 'kontakt-foresporing',
+    label: { no: 'Send forespørsel', en: 'Send inquiry' },
+  },
 ]
 
-const getPageFromHash = (hash) => (hash === '#referansar' ? 'references' : 'home')
+const getPageFromHash = (hash) => {
+  if (hash === '#referansar') return 'references'
+  if (hash.startsWith('#kontakt')) return 'contact'
+  return 'home'
+}
 
 export default function App() {
   const [activeMenu, setActiveMenu] = useState(null)
@@ -108,12 +125,13 @@ export default function App() {
     }
   }
 
-  const goReferences = () => {
+  const goPage = (hash, targetPage) => {
     setActiveMenu(null)
-    if (window.location.hash !== '#referansar') {
-      window.location.hash = 'referansar'
-    } else {
-      setPage('references')
+    if (!hash) return
+    if (window.location.hash !== `#${hash}`) {
+      window.location.hash = hash
+    } else if (targetPage) {
+      setPage(targetPage)
     }
   }
 
@@ -197,9 +215,48 @@ export default function App() {
     },
   ]
 
+  const contactLocations = [
+    {
+      title: 'Fresvik – Hovudkontor',
+      address: ['Hovsvegen, Øyri', '6896 Fresvik'],
+      phone: '57 69 83 00',
+      email: 'post@fresvik.no',
+      mapEmbed:
+        'https://www.openstreetmap.org/export/embed.html?bbox=6.908344%2C61.057524%2C6.948344%2C61.087524&layer=mapnik&marker=61.072524%2C6.928344',
+      mapLink: 'https://www.openstreetmap.org/?mlat=61.072524&mlon=6.928344#map=16/61.072524/6.928344',
+    },
+    {
+      title: 'Drammen – Salskontor',
+      address: ['Bragernes Torg 4', '3017 Drammen'],
+      phone: '32 88 50 00',
+      email: 'post@fresvik.no',
+      mapEmbed:
+        'https://www.openstreetmap.org/export/embed.html?bbox=10.19%2C59.738%2C10.215%2C59.749&layer=mapnik&marker=59.7439%2C10.2045',
+      mapLink: 'https://www.openstreetmap.org/?mlat=59.7439&mlon=10.2045#map=16/59.7439/10.2045',
+    },
+  ]
+
+  const salesContacts = [
+    {
+      name: 'Arne-Olav Lien Bardølsgaard',
+      phone: '99 55 25 49',
+      email: 'armbard@fresvik.no',
+    },
+    {
+      name: 'Lars Erling Livrud',
+      phone: '40 47 79 12',
+      email: 'larliv@fresvik.no',
+    },
+    {
+      name: 'Frode Winther',
+      phone: '91 38 39 49',
+      email: 'frowin@fresvik.no',
+    },
+  ]
+
   return (
     <div className="page">
-      <header className="hero">
+      <header className={`hero ${page === 'contact' ? 'hero--contact' : ''}`}>
         <div className="hero-overlay" aria-hidden="true" />
 
         <nav className="nav">
@@ -241,13 +298,13 @@ export default function App() {
                       <button className="nav-link" type="button">
                         {item.label[language]}
                       </button>
-                    ) : item.page === 'references' ? (
+                    ) : item.page ? (
                       <a
                         className="nav-link"
                         href={item.href}
                         onClick={(event) => {
                           event.preventDefault()
-                          goReferences()
+                          goPage(item.hash ?? item.page, item.page)
                         }}
                       >
                         {item.label[language]}
@@ -338,6 +395,133 @@ export default function App() {
                   </div>
                 </a>
               ))}
+            </div>
+          </section>
+        </main>
+      ) : null}
+
+      {page === 'contact' ? (
+        <main className="contact-surface">
+          <section className="contact" id="kontakt">
+            <div className="container contact-header">
+              <h2>Kontakt oss</h2>
+              <p>
+                Har du prosjekt i næringsmiddelindustrien, storkjøkken, butikk, laboratorium eller
+                offshore? Ta kontakt med oss på <a href="mailto:post@fresvik.no">post@fresvik.no</a>.
+              </p>
+              <div className="contact-quick-links">
+                <a href="https://fryserom.no">Prosjekt med privatperson? Sjå Fryserom.no</a>
+                <a href="https://www.fresvik.no/tilsette">Sjå tilsette</a>
+              </div>
+            </div>
+
+            <div className="container contact-grid">
+              {contactLocations.map((office) => (
+                <article key={office.title} className="contact-card">
+                  <h3>{office.title}</h3>
+                  <div className="contact-lines">
+                    {office.address.map((line) => (
+                      <p key={line}>{line}</p>
+                    ))}
+                  </div>
+                  <div className="contact-meta">
+                    <a href={`tel:${office.phone.replace(/\s/g, '')}`}>Tel: {office.phone}</a>
+                    <a href={`mailto:${office.email}`}>E-post: {office.email}</a>
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div className="container contact-sales">
+              <div className="contact-section-header">
+                <h3>Salsavdeling</h3>
+                <p>Ta gjerne direkte kontakt med salsavdelinga for prosjekt og pristilbod.</p>
+              </div>
+              <div className="contact-sales-grid">
+                {salesContacts.map((person) => (
+                  <article key={person.email} className="contact-person">
+                    <h4>{person.name}</h4>
+                    <p>
+                      Mob: <a href={`tel:${person.phone.replace(/\s/g, '')}`}>{person.phone}</a>
+                    </p>
+                    <p>
+                      <a href={`mailto:${person.email}`}>{person.email}</a>
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="container contact-form-section" id="kontakt-foresporing">
+              <div className="contact-form-card">
+                <div className="contact-form-header">
+                  <h3>Send oss ei forespørsel</h3>
+                  <p>
+                    Fyll ut skjemaet, så kjem vi tilbake til deg så raskt som mogleg. Du kan òg
+                    sende e-post til <a href="mailto:post@fresvik.no">post@fresvik.no</a>.
+                  </p>
+                </div>
+                <form className="contact-form" action="#" method="post">
+                  <div className="contact-field">
+                    <label htmlFor="contact-name">Namn</label>
+                    <input id="contact-name" name="name" type="text" placeholder="Ditt namn" />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="contact-company">Bedrift</label>
+                    <input id="contact-company" name="company" type="text" placeholder="Bedriftsnamn" />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="contact-email">E-post</label>
+                    <input
+                      id="contact-email"
+                      name="email"
+                      type="email"
+                      placeholder="namn@bedrift.no"
+                      required
+                    />
+                  </div>
+                  <div className="contact-field">
+                    <label htmlFor="contact-phone">Telefon</label>
+                    <input id="contact-phone" name="phone" type="tel" placeholder="Valfritt" />
+                  </div>
+                  <div className="contact-field contact-field-full">
+                    <label htmlFor="contact-message">Melding</label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      rows="5"
+                      placeholder="Kort om prosjektet ditt"
+                      required
+                    />
+                  </div>
+                  <button type="submit">Send forespørsel</button>
+                </form>
+              </div>
+            </div>
+
+            <div className="container contact-maps">
+              <div className="contact-section-header">
+                <h3>Kart</h3>
+                <p>Finn oss her — både hovudkontor og salskontor.</p>
+              </div>
+              <div className="contact-map-grid">
+                {contactLocations.map((office) => (
+                  <article key={office.mapEmbed} className="contact-map-card">
+                    <div className="contact-map-header">
+                      <h4>{office.title}</h4>
+                      <a href={office.mapLink}>Åpne i kart</a>
+                    </div>
+                    <div className="contact-map">
+                      <iframe
+                        title={`Kart ${office.title}`}
+                        src={office.mapEmbed}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      />
+                    </div>
+                  </article>
+                ))}
+              </div>
             </div>
           </section>
         </main>
