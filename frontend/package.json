@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "api:types": "openapi-typescript http://localhost:8000/api/schema/ -o src/api/types.ts"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
+    "openapi-typescript": "^6.7.6",
     "vite": "^5.4.0"
   }
 }

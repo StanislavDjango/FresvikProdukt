@@ -183,3 +183,18 @@ docker compose up -d
 3) В туннеле ingress → домен → локальный порт  
 4) DNS CNAME → tunnel‑id  
 5) Проверка через `https://домен`
+
+
+
+
+Скорее всего причина в том, что ты не пересобрал образ перед push, поэтому Docker Hub видит тот же digest и время «Last pushed» не меняется. В твоём выводе видно Layer already exists — это признак, что образ не изменился.
+
+Как правильно:
+
+Собери новый образ (после изменений):
+docker build -t stanyslav/fresvik-frontend:latest ./frontend
+Запушь:
+docker push stanyslav/fresvik-frontend:latest
+Или выполни сам на сервере
+cd /srv/fresvik
+docker compose pull && docker compose up -d

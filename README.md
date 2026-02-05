@@ -39,5 +39,19 @@ npm run dev
 Environment variable for API:
 
 ```
-VITE_API_URL=http://localhost:8000/api/
+VITE_API_URL=http://localhost:8000/api/v1/
+```
+
+## API schema (OpenAPI)
+
+Schema JSON:
+
+```
+http://localhost:8000/api/schema/
+```
+
+Swagger UI:
+
+```
+http://localhost:8000/api/docs/
 ```
