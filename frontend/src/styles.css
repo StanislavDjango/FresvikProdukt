@@ -578,6 +578,116 @@ button {
   gap: clamp(16px, 2.4vw, 28px);
 }
 
+.home-surface {
+  position: relative;
+  background: #f5f9ff;
+}
+
+.home-surface::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -96px;
+  height: 96px;
+  background: linear-gradient(180deg, rgba(10, 21, 36, 0) 0%, #f5f9ff 100%);
+  pointer-events: none;
+}
+
+.products-preview {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 4.5vw, 56px) 0 clamp(32px, 5vw, 64px);
+  color: #0b1a2b;
+}
+
+.products-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(18px, 3vw, 32px);
+}
+
+.products-header h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+}
+
+.products-header p {
+  margin: 0;
+  color: rgba(28, 52, 78, 0.75);
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+}
+
+.products-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: rgba(28, 52, 78, 0.7);
+  padding: 16px 0;
+}
+
+.product-card {
+  background: #ffffff;
+  border: 1px solid rgba(180, 210, 240, 0.55);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 16px 28px rgba(12, 32, 58, 0.12);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-thumb {
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(140deg, rgba(120, 170, 220, 0.25), rgba(20, 55, 95, 0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-placeholder {
+  font-weight: 700;
+  color: rgba(28, 52, 78, 0.65);
+}
+
+.product-info {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.product-info h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #0b1a2b;
+}
+
+.product-info p {
+  margin: 0;
+  color: rgba(28, 52, 78, 0.75);
+}
+
+.product-chip {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(60, 115, 175, 0.12);
+  color: rgba(28, 52, 78, 0.8);
+  font-size: 0.75rem;
+}
+
 .contact-surface {
   position: relative;
   background: #f5f9ff;
@@ -1234,4 +1344,17 @@ button {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.error-boundary {
+  min-height: 40vh;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #0b1a2b;
+  background: #f5f9ff;
 }

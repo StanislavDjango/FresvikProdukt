@@ -7,15 +7,21 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --host",
-    "api:types": "openapi-typescript http://localhost:8000/api/schema/ -o src/api/types.ts"
+    "api:types": "openapi-typescript http://localhost:8000/api/schema/ -o src/api/types.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.52.0",
+    "axios": "^1.7.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "openapi-typescript": "^6.7.6",
+    "typescript": "^5.5.4",
     "vite": "^5.4.0"
   }
 }

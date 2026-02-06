@@ -1,7 +1,20 @@
-﻿import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './styles.css'
+import { useProducts } from './api/products'
 
-const navItems = [
+type Language = 'no' | 'en'
+type PageKey = 'home' | 'references' | 'contact'
+
+type NavItem = {
+  key: string
+  href: string
+  label: Record<Language, string>
+  items?: Record<Language, string[]>
+  page?: PageKey
+  hash?: string
+}
+
+const navItems: NavItem[] = [
   {
     key: 'product',
     href: '/produkt-mappe',
@@ -73,19 +86,25 @@ const navItems = [
   },
 ]
 
-const getPageFromHash = (hash) => {
+const getPageFromHash = (hash: string): PageKey => {
   if (hash === '#referansar') return 'references'
   if (hash.startsWith('#kontakt')) return 'contact'
   return 'home'
 }
 
 export default function App() {
-  const [activeMenu, setActiveMenu] = useState(null)
-  const [language, setLanguage] = useState('no')
-  const [page, setPage] = useState(() => getPageFromHash(window.location.hash))
+  const [activeMenu, setActiveMenu] = useState<string | null>(null)
+  const [language, setLanguage] = useState<Language>('no')
+  const [page, setPage] = useState<PageKey>(() => getPageFromHash(window.location.hash))
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [mobileOpenSection, setMobileOpenSection] = useState(null)
-  const closeTimer = useRef(null)
+  const [mobileOpenSection, setMobileOpenSection] = useState<string | null>(null)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const {
+    data: products,
+    isLoading: isProductsLoading,
+    isError: isProductsError,
+  } = useProducts()
+  const productsPreview = products?.slice(0, 3) ?? []
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -98,7 +117,7 @@ export default function App() {
 
   useEffect(() => {
     if (!isMobileMenuOpen) return
-    const handleKey = (event) => {
+    const handleKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setMobileMenuOpen(false)
         setMobileOpenSection(null)
@@ -112,7 +131,7 @@ export default function App() {
     }
   }, [isMobileMenuOpen])
 
-  const openMenu = (key) => {
+  const openMenu = (key: string) => {
     if (closeTimer.current) {
       clearTimeout(closeTimer.current)
     }
@@ -128,7 +147,7 @@ export default function App() {
     }, 200)
   }
 
-  const setLang = (lang) => {
+  const setLang = (lang: Language) => {
     if (lang === language) return
     setLanguage(lang)
     setActiveMenu(null)
@@ -145,7 +164,7 @@ export default function App() {
     }
   }
 
-  const goPage = (hash, targetPage) => {
+  const goPage = (hash: string | undefined, targetPage?: PageKey) => {
     setActiveMenu(null)
     setMobileMenuOpen(false)
     setMobileOpenSection(null)
@@ -167,7 +186,7 @@ export default function App() {
     })
   }
 
-  const handleMobileSection = (key) => {
+  const handleMobileSection = (key: string) => {
     setMobileOpenSection((current) => (current === key ? null : key))
   }
 
@@ -519,6 +538,43 @@ export default function App() {
         </div>
       </header>
 
+      {page === 'home' ? (
+        <main className="home-surface">
+          <section className="products-preview">
+            <div className="container products-header">
+              <h2>Utvalde produkt</h2>
+              <p>Ein rask oversikt over utvalde produkt og løysingar frå Fresvik Produkt.</p>
+            </div>
+            <div className="container products-grid">
+              {isProductsLoading ? (
+                <div className="products-state">Laster produkt …</div>
+              ) : isProductsError ? (
+                <div className="products-state">Klarte ikkje å hente produkt akkurat no.</div>
+              ) : productsPreview.length ? (
+                productsPreview.map((product) => (
+                  <article key={product.slug} className="product-card">
+                    <div className="product-thumb">
+                      {product.hero_image_url ? (
+                        <img src={product.hero_image_url} alt={product.title} loading="lazy" />
+                      ) : (
+                        <div className="product-placeholder">FP</div>
+                      )}
+                    </div>
+                    <div className="product-info">
+                      <h3>{product.title}</h3>
+                      {product.subtitle ? <p>{product.subtitle}</p> : null}
+                      <span className="product-chip">#{product.slug}</span>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <div className="products-state">Ingen produkt funne.</div>
+              )}
+            </div>
+          </section>
+        </main>
+      ) : null}
+
       {page === 'references' ? (
         <main className="references-surface">
           <section className="references">
@@ -637,7 +693,7 @@ export default function App() {
                     <textarea
                       id="contact-message"
                       name="message"
-                      rows="5"
+                      rows={5}
                       placeholder="Kort om prosjektet ditt"
                       required
                     />

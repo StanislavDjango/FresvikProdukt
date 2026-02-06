@@ -55,3 +55,9 @@ Swagger UI:
 ```
 http://localhost:8000/api/docs/
 ```
+
+Health check:
+
+```
+http://localhost:8000/api/v1/health/
+```
